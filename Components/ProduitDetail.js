@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { getProduitDetailFromApi } from '../API/api'
 import { connect } from 'react-redux'
+import EnlargeShrink from '../Animations/EnlargeShrink'
 
 class ProduitDetail extends React.Component {
     constructor(props) {
@@ -47,10 +48,13 @@ class ProduitDetail extends React.Component {
           sourceImage = require('../Images/ic_favorite.png')
         }
         return (
-          <Image
-            style={styles.favorite_image}
-            source={sourceImage}
-          />
+          <EnlargeShrink>
+            <Image
+              style={styles.favorite_image}
+              source={sourceImage}
+            />
+          </EnlargeShrink>
+          
         )
     }
     
@@ -135,8 +139,9 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   favorite_image: {
-    width: 40,
-    height: 40
+    flex: 1,
+    width: null,
+    height: null
   }
 })
 const mapStateToProps = (state) => {

@@ -19,11 +19,19 @@ class ProduitList extends React.Component {
 
   render() {
     return (
-            <ProduitItem
-              produit={this.state.produits}
-              isProduitFavorite={(this.props.favoritesProduit.findIndex(produit => produit.id === item.id) !== -1) ? true : false}
-              displayDetailForProduit={this._displayDetailForProduit}
-            />
+      <FlatList
+        style={styles.list}
+        data={this.props.produits}
+        extraData={this.props.favoritesProduit}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => (
+          <FilmItem
+          produit={item}
+          isProduitFavorite={(this.props.favoritesProduit.findIndex(produit => produit.id === item.id) !== -1) ? true : false}
+          displayDetailForProduit={this._displayDetailForProduit}
+          />
+        )}
+      />
     )
   }
 }
